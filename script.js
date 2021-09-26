@@ -1,7 +1,8 @@
 let playerSelection;
 let computerSelection;
 let count = 0;
-
+const div = document.createElement("div");
+const container = document.querySelector("#container");
 const computerPlay = () => {
   let randomnumber = Number(Math.floor(Math.random() * 3));
   let computerChoice;
@@ -22,30 +23,31 @@ const computerPlay = () => {
 const playRound = (playerSelection, computerSelection) => {
   computerSelection = computerPlay();
   if (playerSelection == "Rock" && computerSelection == "Paper") {
-    return "You Lose! Paper beats Rock";
+    div.textContent = "You Lose! Paper beats Rock";
   } else if (playerSelection == "Paper" && computerSelection == "Scissor") {
-    return "You Lose! Scissor beats Paper";
+    div.textContent = "You Lose! Scissor beats Paper";
   } else if (playerSelection == "Scissor" && computerSelection == "Rock") {
-    return "You Lose! Rock beats Scissor";
+    div.textContent = "You Lose! Rock beats Scissor";
   } else if (playerSelection == "Scissor" && computerSelection == "Paper") {
     count++;
-    return "You Win! Scissor beats Paper";
+    div.textContent = "You Win! Scissor beats Paper";
   } else if (playerSelection == "Rock" && computerSelection == "Scissor") {
     count++;
-    return "You Win! Rock beats Scissor";
+    div.textContent = "You Win! Rock beats Scissor";
   } else if (playerSelection == "Paper" && computerSelection == "Rock") {
     count++;
-    return "You Win! Paper beats Rock";
+    div.textContent = "You Win! Paper beats Rock";
   }
+  if (count == 5) {
+    div.textContent = "You have won 5 rounds";
+  }
+  return container.appendChild(div);
 };
 
 document.body.addEventListener("click", (event) => {
   if (event.target.nodeName == "BUTTON") {
     playerSelection = event.target.value;
-    console.log(playRound(playerSelection, computerSelection));
-  }
-  if (count == 5) {
-    return "Congrats you won Rounds";
+    playRound(playerSelection, computerSelection);
   }
 });
 /*const game = () => {
